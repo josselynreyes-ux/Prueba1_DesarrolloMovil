@@ -1,0 +1,275 @@
+
+<ion-header>
+  <ion-toolbar class="barra-superior">
+    <ion-title>UrbanInspect</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fondo-registro">
+
+  <ion-button
+    class="boton-regresar"
+    fill="clear"
+    routerLink="/inicio">
+    ← Volver al inicio
+  </ion-button>
+
+  @if (mostrarOpcionesBorrador) {
+    <ion-card class="tarjeta-borrador">
+      <ion-card-header>
+        <ion-card-title>Borrador encontrado</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>
+          Existe una incidencia que no terminaste de registrar.
+          ¿Qué deseas hacer?
+        </p>
+
+        <ion-button expand="block" (click)="continuarBorrador()">
+          Continuar con el borrador
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          color="medium"
+          (click)="descartarBorrador()">
+          Descartar borrador
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  } @else {
+
+    <section class="encabezado-registro">
+      <span class="etiqueta">NUEVO REPORTE</span>
+      <h1>Registrar incidencia</h1>
+      <p>Completa los datos del problema urbano para facilitar su seguimiento.</p>
+      <p class="texto-obligatorio">Los campos marcados con * son obligatorios.</p>
+    </section>
+
+    <section class="seccion-formulario">
+      <h2>Información del problema</h2>
+      <p class="descripcion-seccion">Describe qué ocurre y dónde sucede.</p>
+
+      <ion-item class="campo-formulario">
+        <ion-label position="stacked">Tipo de incidencia *</ion-label>
+        <ion-select
+          placeholder="Selecciona un tipo"
+          [(ngModel)]="tipo"
+          (ngModelChange)="guardarBorradorAutomatico()">
+          <ion-select-option value="Bache">Bache</ion-select-option>
+          <ion-select-option value="Alumbrado">Luminarias dañadas</ion-select-option>
+          <ion-select-option value="Parque">Daños en parques</ion-select-option>
+          <ion-select-option value="Alcantarillado">Alcantarillas obstruidas</ion-select-option>
+          <ion-select-option value="Señalizacion">Señalización deteriorada</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="campo-formulario">
+        <ion-label position="stacked">Descripción *</ion-label>
+        <ion-textarea
+          placeholder="Describe el problema con el mayor detalle posible"
+          [(ngModel)]="descripcion"
+          (ngModelChange)="guardarBorradorAutomatico()">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item class="campo-formulario">
+        <ion-label position="stacked">Dirección *</ion-label>
+        <ion-input
+          placeholder="Ej. Av. Amazonas y Naciones Unidas"
+          [(ngModel)]="direccion"
+          (ngModelChange)="guardarBorradorAutomatico()">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="campo-formulario">
+        <ion-label position="stacked">Sector *</ion-label>
+        <ion-input
+          placeholder="Ej. Iñaquito"
+          [(ngModel)]="sector"
+          (ngModelChange)="guardarBorradorAutomatico()">
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="campo-formulario">
+        <ion-label position="stacked">Prioridad *</ion-label>
+        <ion-select
+          [(ngModel)]="prioridad"
+          (ngModelChange)="guardarBorradorAutomatico()">
+          <ion-select-option value="baja">Baja</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="alta">Alta</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </section>
+
+    <section class="seccion-formulario">
+      <h2>Ubicación del incidente</h2>
+      <p class="descripcion-seccion">
+        Puedes obtener la ubicación con GPS o introducir las coordenadas manualmente.
+        Para los baches es obligatorio indicar la ubicación.
+      </p>
+
+      <ion-button
+        expand="block"
+        class="boton-principal"
+        (click)="obtenerUbicacion()"
+        [disabled]="obteniendoUbicacion">
+        {{ obteniendoUbicacion ? 'Obteniendo ubicación...' : 'Obtener ubicación GPS' }}
+      </ion-button>
+
+      @if (mensajeUbicacion) {
+        <p class="mensaje-estado" role="status">{{ mensajeUbicacion }}</p>
+      }
+
+      <div class="rejilla-coordenadas">
+        <ion-item class="campo-formulario">
+          <ion-label position="stacked">Latitud manual</ion-label>
+          <ion-input
+            type="number"
+            placeholder="-0.1807"
+            [(ngModel)]="latitudManual"
+            (ngModelChange)="guardarBorradorAutomatico()">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="campo-formulario">
+          <ion-label position="stacked">Longitud manual</ion-label>
+          <ion-input
+            type="number"
+            placeholder="-78.4678"
+            [(ngModel)]="longitudManual"
+            (ngModelChange)="guardarBorradorAutomatico()">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="boton-secundario"
+        (click)="usarCoordenadasManuales()">
+        Usar coordenadas manuales
+      </ion-button>
+
+      @if (mensajeCoordenadas) {
+        <p class="mensaje-estado" role="status">{{ mensajeCoordenadas }}</p>
+      }
+
+      @if (latitud !== null && longitud !== null) {
+        <div class="tarjeta-informacion">
+          <h3>Ubicación seleccionada</h3>
+          <p><strong>Latitud:</strong> {{ latitud }}</p>
+          <p><strong>Longitud:</strong> {{ longitud }}</p>
+        </div>
+      }
+    </section>
+
+    <section class="seccion-formulario">
+      <h2>Fotografía</h2>
+      <p class="descripcion-seccion">
+        Toma una fotografía con la cámara o selecciona una imagen de la galería.
+        Si la prioridad es alta, la fotografía es obligatoria.
+      </p>
+
+      <input
+        #selectorFoto
+        type="file"
+        accept="image/*"
+        hidden
+        (change)="seleccionarFotografia($event)">
+
+      <!-- Nuevo botón para abrir la cámara -->
+      <ion-button
+        expand="block"
+        class="boton-principal"
+        (click)="tomarFotografia()">
+        Tomar foto con la cámara
+      </ion-button>
+
+      <!-- Botón existente para elegir desde la galería -->
+      <ion-button
+        expand="block"
+        class="boton-secundario"
+        (click)="selectorFoto.click()">
+        Seleccionar de la galería
+      </ion-button>
+
+      @if (mensajeFoto) {
+        <p class="mensaje-estado" role="status">{{ mensajeFoto }}</p>
+      }
+
+      @if (fotografia) {
+        <div class="tarjeta-fotografia">
+          <h3>Vista previa</h3>
+
+          <ion-img
+            class="imagen-previa"
+            [src]="fotografia"
+            alt="Fotografía de la incidencia">
+          </ion-img>
+
+          <ion-button
+            expand="block"
+            color="medium"
+            (click)="fotografia = ''; mensajeFoto = 'Fotografía eliminada.'; guardarBorradorAutomatico()">
+            Eliminar fotografía
+          </ion-button>
+        </div>
+      }
+    </section>
+
+    <section class="seccion-formulario">
+      <h2>Condiciones meteorológicas</h2>
+      <p class="descripcion-seccion">
+        Consulta las condiciones del lugar antes de guardar la incidencia.
+      </p>
+
+      <ion-button
+        expand="block"
+        class="boton-principal"
+        (click)="consultarClima()"
+        [disabled]="consultandoClima">
+        {{ consultandoClima ? 'Consultando clima...' : 'Consultar clima' }}
+      </ion-button>
+
+      @if (clima) {
+        <div class="tarjeta-informacion">
+          <h3>Clima consultado</h3>
+          <p><strong>Temperatura:</strong> {{ clima.temperatura }} °C</p>
+          <p><strong>Precipitación:</strong> {{ clima.precipitacion }} mm</p>
+          <p><strong>Condición:</strong> {{ clima.descripcion }}</p>
+        </div>
+
+        @if (clima.precipitacion > 5) {
+          <div class="aviso-lluvia" role="status">
+            <strong>Advertencia por lluvia</strong>
+            <p>
+              La precipitación supera los 5 mm. Ten precaución al atender esta incidencia.
+            </p>
+          </div>
+        }
+      }
+
+      @if (mensajeClima) {
+        <p class="mensaje-estado" role="status">{{ mensajeClima }}</p>
+      }
+    </section>
+
+    <section class="seccion-guardar">
+      <ion-button
+        expand="block"
+        class="boton-guardar"
+        [disabled]="guardando"
+        (click)="guardarFormulario()">
+        {{ guardando ? 'Guardando...' : 'Guardar incidencia' }}
+      </ion-button>
+
+      @if (mensaje) {
+        <p class="mensaje-estado" role="status">{{ mensaje }}</p>
+      }
+    </section>
+
+  }
+
+</ion-content>

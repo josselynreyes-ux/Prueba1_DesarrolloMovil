@@ -1,0 +1,151 @@
+
+<ion-header>
+  <ion-toolbar class="barra-superior">
+    <ion-title>UrbanInspect</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fondo-incidencias">
+
+  <ion-button
+    class="boton-regresar"
+    fill="clear"
+    routerLink="/inicio">
+    ← Volver al inicio
+  </ion-button>
+
+  <section class="encabezado-lista">
+    <span class="etiqueta">GESTIÓN URBANA</span>
+    <h1>Incidencias urbanas</h1>
+    <p>Consulta y realiza el seguimiento de los problemas registrados.</p>
+  </section>
+
+  <section class="filtro-seguimiento">
+    <ion-button
+      expand="block"
+      class="boton-filtro"
+      (click)="cambiarFiltroSeguimiento()"
+      [disabled]="cargando">
+      {{ mostrarSoloSeguidas
+        ? 'Mostrar todas las incidencias'
+        : 'Mis incidencias seguidas (' + incidenciasSeguidas.length + ')' }}
+    </ion-button>
+  </section>
+
+  @if (mensajeError) {
+    <div class="mensaje-error" role="alert">
+      <p>{{ mensajeError }}</p>
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="cargarIncidencias()">
+        Reintentar
+      </ion-button>
+    </div>
+  }
+
+  @if (incidenciasVisibles.length === 0 && !cargando && !mensajeError) {
+    <div class="estado-vacio">
+      <div class="icono-vacio">!</div>
+
+      @if (mostrarSoloSeguidas) {
+        <h2>Sin seguimiento</h2>
+        <p>Aún no sigues ninguna incidencia. Puedes marcar una desde la lista.</p>
+      } @else {
+        <h2>Sin incidencias</h2>
+        <p>No hay incidencias registradas para mostrar.</p>
+      }
+    </div>
+  }
+
+  @for (incidencia of incidenciasVisibles; track incidencia.id) {
+    <ion-card class="tarjeta-incidencia">
+
+      <ion-card-header>
+        <div class="cabecera-tarjeta">
+          <div>
+            <span class="texto-codigo">INCIDENCIA #{{ incidencia.id }}</span>
+            <ion-card-title class="titulo-incidencia">
+              {{ incidencia.tipo }}
+            </ion-card-title>
+          </div>
+
+          <span class="estado-incidencia">
+            {{ incidencia.estado }}
+          </span>
+        </div>
+      </ion-card-header>
+
+      @if (incidencia.fotografia) {
+        <ion-img
+          class="foto-incidencia"
+          [src]="incidencia.fotografia"
+          [alt]="'Fotografía de la incidencia ' + incidencia.id">
+        </ion-img>
+      }
+
+      <ion-card-content>
+        <div class="descripcion-incidencia">
+          <span class="etiqueta-dato">DESCRIPCIÓN</span>
+          <p>{{ incidencia.descripcion }}</p>
+        </div>
+
+        <div class="datos-incidencia">
+          <div class="dato">
+            <span class="etiqueta-dato">DIRECCIÓN</span>
+            <p>{{ incidencia.direccion }}</p>
+          </div>
+
+          <div class="dato">
+            <span class="etiqueta-dato">SECTOR</span>
+            <p>{{ incidencia.sector }}</p>
+          </div>
+
+          <div class="dato">
+            <span class="etiqueta-dato">FECHA</span>
+            <p>{{ incidencia.fecha }}</p>
+          </div>
+
+          <div class="dato">
+            <span class="etiqueta-dato">PRIORIDAD</span>
+            <p>{{ incidencia.prioridad }}</p>
+          </div>
+        </div>
+
+        <ion-button
+          expand="block"
+          class="boton-seguimiento"
+          [color]="estaEnSeguimiento(incidencia) ? 'success' : 'medium'"
+          (click)="alternarSeguimiento(incidencia)">
+          {{ estaEnSeguimiento(incidencia)
+            ? 'Dejar de seguir'
+            : 'Seguir incidencia' }}
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          class="boton-detalle"
+          [routerLink]="['/incidencias', incidencia.id]">
+          Ver detalle y actualizar estado
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+  }
+
+  @if (cargando) {
+    <div class="mensaje-cargando">
+      <p>Cargando incidencias...</p>
+    </div>
+  }
+
+  @if (hayMasIncidencias && !cargando && !mensajeError && !mostrarSoloSeguidas) {
+    <ion-button
+      expand="block"
+      class="boton-cargar"
+      (click)="cargarIncidencias()">
+      Cargar más incidencias
+    </ion-button>
+  }
+
+</ion-content>

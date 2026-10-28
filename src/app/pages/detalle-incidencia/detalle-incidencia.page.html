@@ -1,0 +1,153 @@
+ <ion-header>
+  <ion-toolbar class="barra-superior">
+    <ion-title>UrbanInspect</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fondo-detalle">
+
+  <ion-button
+    class="boton-regresar"
+    fill="clear"
+    (click)="volverAlListado()">
+    ← Volver a la lista
+  </ion-button>
+
+  <section class="encabezado-detalle">
+    <span class="etiqueta">GESTIÓN URBANA</span>
+    <h1>Detalle de la incidencia</h1>
+    <p>Consulta la información y actualiza el estado del reporte.</p>
+  </section>
+
+  @if (cargando) {
+    <div class="mensaje-cargando">
+      <p>Cargando información...</p>
+    </div>
+  }
+
+  @if (mensaje) {
+    <div class="mensaje-estado" role="status">
+      {{ mensaje }}
+    </div>
+  }
+
+  @if (incidencia) {
+    <ion-card class="tarjeta-detalle">
+      <ion-card-header>
+        <div class="cabecera-tarjeta">
+          <div>
+            <span class="texto-codigo">INCIDENCIA #{{ incidencia.id }}</span>
+            <ion-card-title class="titulo-incidencia">
+              {{ incidencia.tipo }}
+            </ion-card-title>
+          </div>
+          <span class="estado-incidencia">
+            {{ incidencia.estado }}
+          </span>
+        </div>
+      </ion-card-header>
+
+      @if (incidencia.fotografia) {
+        <ion-img
+          class="foto-incidencia"
+          [src]="incidencia.fotografia"
+          alt="Fotografía de la incidencia">
+        </ion-img>
+      }
+
+      <ion-card-content>
+        <div class="dato-detalle">
+          <span class="etiqueta-dato">DESCRIPCIÓN</span>
+          <p>{{ incidencia.descripcion }}</p>
+        </div>
+
+        <div class="rejilla-datos">
+          <div class="dato-detalle">
+            <span class="etiqueta-dato">DIRECCIÓN</span>
+            <p>{{ incidencia.direccion }}</p>
+          </div>
+
+          <div class="dato-detalle">
+            <span class="etiqueta-dato">SECTOR</span>
+            <p>{{ incidencia.sector }}</p>
+          </div>
+
+          <div class="dato-detalle">
+            <span class="etiqueta-dato">FECHA</span>
+            <p>{{ incidencia.fecha }}</p>
+          </div>
+
+          <div class="dato-detalle">
+            <span class="etiqueta-dato">PRIORIDAD</span>
+            <p>{{ incidencia.prioridad }}</p>
+          </div>
+        </div>
+
+        @if (incidencia.observacion) {
+          <div class="bloque-observacion">
+            <span class="etiqueta-dato">OBSERVACIÓN DE RESOLUCIÓN</span>
+            <p>{{ incidencia.observacion }}</p>
+          </div>
+        }
+      </ion-card-content>
+    </ion-card>
+
+    @if (
+      incidencia.estado.trim().toLowerCase() === 'pendiente' ||
+      incidencia.estado.trim().toLowerCase() === 'en proceso'
+    ) {
+      <section class="seccion-actualizacion">
+        <h2>Actualizar estado</h2>
+        <p class="descripcion-seccion">
+          Cambia el estado según el avance de la incidencia.
+        </p>
+
+        @if (incidencia.estado.trim().toLowerCase() === 'pendiente') {
+          <ion-button
+            expand="block"
+            class="boton-proceso"
+            [disabled]="actualizando"
+            (click)="cambiarEstado('en proceso')">
+            Marcar en proceso
+          </ion-button>
+        }
+
+        <ion-item class="campo-observacion">
+          <ion-label position="stacked">
+            Observación para resolver *
+          </ion-label>
+          <ion-textarea
+            placeholder="Describe el resultado o trabajo realizado"
+            [(ngModel)]="observacion"
+            [autoGrow]="true">
+          </ion-textarea>
+        </ion-item>
+
+        <p class="ayuda-observacion">
+          Debes escribir una observación antes de marcar la incidencia como resuelta.
+        </p>
+
+        <ion-button
+          expand="block"
+          class="boton-resuelta"
+          [disabled]="actualizando"
+          (click)="cambiarEstado('resuelta')">
+          {{ actualizando ? 'Actualizando...' : 'Marcar como resuelta' }}
+        </ion-button>
+      </section>
+    } @else {
+      <div class="aviso-resuelta">
+        <h2>Incidencia resuelta</h2>
+        <p>Esta incidencia está resuelta y no permite más cambios de estado.</p>
+      </div>
+    }
+  }
+
+  <ion-button
+    expand="block"
+    class="boton-volver-listado"
+    (click)="volverAlListado()">
+    Volver a la lista de incidencias
+  </ion-button>
+
+</ion-content>

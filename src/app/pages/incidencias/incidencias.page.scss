@@ -1,0 +1,300 @@
+
+:host {
+  --verde-principal: #16845b;
+  --verde-oscuro: #116747;
+  --verde-claro: #e5f5ed;
+  --texto-principal: #20352c;
+  --texto-secundario: #708078;
+}
+
+.barra-superior {
+  --background: #ffffff;
+  --color: var(--texto-principal);
+  --border-color: #e7eee9;
+}
+
+.barra-superior ion-title {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.fondo-incidencias {
+  --background: #f5f8f6;
+}
+
+.boton-regresar {
+  margin: 4px 0 12px -8px;
+  --color: var(--verde-oscuro);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.encabezado-lista {
+  padding: 8px 2px 22px;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.encabezado-lista h1 {
+  margin: 13px 0 8px;
+  color: var(--texto-principal);
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.encabezado-lista p {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.filtro-seguimiento {
+  margin-bottom: 20px;
+}
+
+.filtro-seguimiento ion-button,
+.mensaje-error ion-button,
+.boton-seguimiento,
+.boton-detalle,
+.boton-cargar {
+  min-height: 46px;
+  margin: 0;
+  --border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.boton-filtro {
+  --background: var(--verde-principal);
+  --background-activated: var(--verde-oscuro);
+  --color: #ffffff;
+}
+
+.tarjeta-incidencia {
+  margin: 0 0 18px;
+  overflow: hidden;
+  border: 1px solid #e5ede7;
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(30, 65, 45, 0.05);
+}
+
+.tarjeta-incidencia ion-card-header {
+  padding: 17px 16px 12px;
+}
+
+.cabecera-tarjeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.texto-codigo {
+  display: block;
+  margin-bottom: 8px;
+  color: #85938b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.titulo-incidencia {
+  color: var(--texto-principal);
+  font-size: 19px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.estado-incidencia {
+  flex-shrink: 0;
+  max-width: 48%;
+  padding: 6px 9px;
+  border-radius: 20px;
+  background: #e5f5ed;
+  color: #116747;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-transform: capitalize;
+}
+
+.foto-incidencia {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 210px;
+  background: #edf2ee;
+  overflow: hidden;
+}
+
+.foto-incidencia::part(image) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #edf2ee;
+}
+
+.tarjeta-incidencia ion-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 15px 16px 17px;
+  background: #ffffff;
+}
+
+.tarjeta-incidencia ion-card-content {
+  padding: 15px 16px 17px;
+}
+
+.descripcion-incidencia {
+  margin-bottom: 17px;
+}
+
+.etiqueta-dato {
+  display: block;
+  margin-bottom: 5px;
+  color: #829087;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.descripcion-incidencia p,
+.dato p {
+  margin: 0;
+  color: var(--texto-principal);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.datos-incidencia {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 12px;
+  padding: 15px 0;
+  margin-bottom: 15px;
+  border-top: 1px solid #edf1ee;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.dato {
+  min-width: 0;
+}
+
+.boton-seguimiento {
+  margin-bottom: 9px;
+  --background: var(--verde-claro);
+  --color: var(--verde-oscuro);
+  --background-activated: #d0ebdc;
+}
+
+.boton-detalle {
+  --background: var(--verde-principal);
+  --background-activated: var(--verde-oscuro);
+  --color: #ffffff;
+}
+
+.boton-cargar {
+  margin: 8px 0 24px;
+  --background: #ffffff;
+  --color: var(--verde-oscuro);
+  --border-color: #cfe3d6;
+  --border-style: solid;
+  --border-width: 1px;
+}
+
+.estado-vacio,
+.mensaje-cargando {
+  margin: 10px 0 20px;
+  padding: 25px 18px;
+  border: 1px solid #e5ede7;
+  border-radius: 16px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.icono-vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.estado-vacio h2 {
+  margin: 0 0 8px;
+  color: var(--texto-principal);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.estado-vacio p,
+.mensaje-cargando p {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mensaje-error {
+  margin-bottom: 18px;
+  padding: 15px;
+  border: 1px solid #f0cccc;
+  border-radius: 13px;
+  background: #fff0f0;
+  color: #a52b2b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mensaje-error p {
+  margin: 0 0 12px;
+}
+
+.mensaje-error ion-button {
+  --color: #a52b2b;
+}
+
+@media (min-width: 650px) {
+  .encabezado-lista h1 {
+    font-size: 32px;
+  }
+
+  .tarjeta-incidencia {
+    max-width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .filtro-seguimiento,
+  .mensaje-error,
+  .estado-vacio,
+  .mensaje-cargando,
+  .boton-cargar {
+    max-width: 850px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

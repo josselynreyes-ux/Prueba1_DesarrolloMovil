@@ -1,0 +1,234 @@
+.barra-superior {
+  --background: #16845b;
+  --color: #ffffff;
+}
+
+.fondo-detalle {
+  --background: #f4faf6;
+  color: #24352c;
+}
+
+.boton-regresar {
+  --color: #16845b;
+  font-weight: 600;
+  text-transform: none;
+  margin: 0 0 8px -8px;
+}
+
+.encabezado-detalle {
+  margin: 8px 0 24px;
+}
+
+.etiqueta {
+  display: inline-block;
+  color: #16845b;
+  background: #e5f5ed;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.encabezado-detalle h1 {
+  color: #116747;
+  font-size: 27px;
+  font-weight: 750;
+  margin: 12px 0 8px;
+}
+
+.encabezado-detalle p,
+.descripcion-seccion {
+  color: #64756b;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tarjeta-detalle {
+  margin: 0 0 22px;
+  border: 1px solid #dceee4;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(22, 132, 91, 0.07);
+}
+
+.tarjeta-detalle ion-card-header {
+  padding: 20px 18px 14px;
+}
+
+.cabecera-tarjeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.texto-codigo {
+  display: block;
+  color: #728278;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.titulo-incidencia {
+  color: #116747;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.estado-incidencia {
+  display: inline-block;
+  background: #e5f5ed;
+  color: #116747;
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.foto-incidencia {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  background: #edf5ef;
+}
+
+.tarjeta-detalle ion-card-content {
+  padding: 18px;
+}
+
+.dato-detalle {
+  margin-bottom: 18px;
+  min-width: 0;
+}
+
+.etiqueta-dato {
+  display: block;
+  color: #728278;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.dato-detalle p,
+.bloque-observacion p {
+  color: #293b31;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.rejilla-datos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin-top: 18px;
+}
+
+.bloque-observacion {
+  background: #edf7f1;
+  border-left: 4px solid #16845b;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 4px;
+}
+
+.seccion-actualizacion {
+  background: #ffffff;
+  border: 1px solid #dceee4;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.seccion-actualizacion h2,
+.aviso-resuelta h2 {
+  color: #116747;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.descripcion-seccion {
+  margin-bottom: 16px;
+}
+
+.boton-proceso,
+.boton-resuelta,
+.boton-volver-listado {
+  --background: #16845b;
+  --background-activated: #116747;
+  --color: #ffffff;
+  --border-radius: 12px;
+  font-weight: 650;
+  text-transform: none;
+  margin: 14px 0;
+}
+
+.campo-observacion {
+  --background: #f8fcf9;
+  --border-color: #dceee4;
+  --border-radius: 10px;
+  --color: #293b31;
+  border: 1px solid #dceee4;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+
+.campo-observacion ion-label {
+  color: #116747 !important;
+}
+
+.ayuda-observacion {
+  color: #64756b;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px 2px;
+}
+
+.aviso-resuelta {
+  background: #e5f5ed;
+  border: 1px solid #c6e8d4;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.aviso-resuelta p {
+  color: #385b47;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.mensaje-cargando,
+.mensaje-estado {
+  background: #ffffff;
+  border: 1px solid #dceee4;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 12px 0;
+  color: #385b47;
+}
+
+@media (max-width: 420px) {
+  .encabezado-detalle h1 {
+    font-size: 23px;
+  }
+
+  .rejilla-datos {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .cabecera-tarjeta {
+    flex-direction: column;
+  }
+}

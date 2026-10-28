@@ -1,0 +1,110 @@
+
+<ion-header>
+  <ion-toolbar class="barra-superior">
+    <ion-title>
+      <span class="marca">Urban</span>Inspect
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding fondo-inicio">
+
+  <section class="bienvenida">
+    <span class="etiqueta">PANEL PRINCIPAL</span>
+    <h1>Hola, bienvenido</h1>
+    <p>
+      Consulta el estado de las incidencias urbanas
+      y registra problemas de tu ciudad.
+    </p>
+  </section>
+
+  @if (mensajeError) {
+    <div class="mensaje-error">
+      {{ mensajeError }}
+      <ion-button
+        fill="outline"
+        size="small"
+        (click)="cargarIncidencias()">
+        Reintentar
+      </ion-button>
+    </div>
+  }
+
+  <section class="acciones">
+    <ion-button
+      expand="block"
+      routerLink="/registro"
+      class="boton-principal">
+      <span class="icono-boton">+</span>
+      Registrar incidencia
+    </ion-button>
+
+    <ion-button
+      expand="block"
+      routerLink="/incidencias"
+      class="boton-secundario">
+      Consultar incidencias
+    </ion-button>
+  </section>
+
+  <section class="seccion-indicadores">
+    <div class="titulo-seccion">
+      <div>
+        <h2>Resumen general</h2>
+        <p>Estado actual de las incidencias</p>
+      </div>
+      <span class="punto-verde"></span>
+    </div>
+
+    <div class="rejilla-indicadores">
+
+      <ion-card class="tarjeta-indicador tarjeta-total">
+        <ion-card-content>
+          <div class="icono-indicador icono-total">
+            <ion-icon name="layers-outline"></ion-icon>
+          </div>
+          <p>Total registradas</p>
+          <h3>{{ totalIncidencias }}</h3>
+          <span class="texto-indicador">Incidencias en el sistema</span>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="tarjeta-indicador tarjeta-pendiente">
+        <ion-card-content>
+          <div class="icono-indicador icono-pendiente">
+            <ion-icon name="time-outline"></ion-icon>
+          </div>
+          <p>Pendientes</p>
+          <h3>{{ pendientes }}</h3>
+          <span class="texto-indicador">Por atender</span>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="tarjeta-indicador tarjeta-proceso">
+        <ion-card-content>
+          <div class="icono-indicador icono-proceso">
+            <ion-icon name="construct-outline"></ion-icon>
+          </div>
+          <p>En proceso</p>
+          <h3>{{ enProceso }}</h3>
+          <span class="texto-indicador">En atención</span>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+  </section>
+
+  <section class="nota-informativa">
+    <div class="nota-icono">
+      <ion-icon name="location-outline"></ion-icon>
+    </div>
+    <div>
+      <h3>Mejoremos nuestra ciudad</h3>
+      <p>
+        Registra problemas urbanos para facilitar su
+        seguimiento y atención.
+      </p>
+    </div>
+  </section>
+
+</ion-content>
